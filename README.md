@@ -1,17 +1,14 @@
-# Intro
+# Lilygo TTGO T5 2.13" ESP32 ePaper board
 
-I've been playing around with one of these ePaper displays. I've got the LILYGO 2.7" E-Paper Plus Module. The classic thing that people seem to do is get a weather display up and running - so I thought I would do the same.
+This directory contains the port to the
+[LILYGO TTGO T5 V2.3 2.13](http://www.lilygo.cn/prod_view.aspx?TypeId=50031&Id=1149&FId=t3:50031:3)
+board, which incorporates an ESP32 and a 2.13" 250x122 e-ink display.
 
-[![Demo Video](https://img.youtube.com/vi/_O1FjJH591s/0.jpg)](https://www.youtube.com/watch?v=_O1FjJH591s)
+![alt_text, width="200"](./TTGO_T5_2.13.jpg)
 
-There's a really nice library by G6EJD that everyone seems to be using. This already has support for a whole bunch of ePaper displays including the Waveshare 2.7 inch display which is the one that is used on the LILYGO board I have.
+The T5 board is known to have had three different screen revisions, as detailed
+[on this github page](https://github.com/lewisxhe/TTGO-EPaper-Series#note).
+This port uses the latest recommended screen driver, `GxGDEM0213B74.h`.
+[Device Specs](https://mikroelectron.com/Product/LILYGO-TTGO-T5-V2-3-1_2-13-Inch-E-Paper-Screen/)
 
-https://github.com/G6EJD/ESP32-e-Paper-Weather-Display
-
-Most of the instructions are around using the Arduino IDE but I much prefer PlatformIO so this repo gets it all working there.
-
-You can order the module I'm using here: https://s.click.aliexpress.com/e/\_AZRYxj
-
-# Getting started
-
-You'll need to modify the settings in `own_credentials.h`. Add your WiFi details, get an API key from https://openweathermap.org/. And update your home city and timezone.
+[Official Repository](https://github.com/Xinyuan-LilyGO/LilyGo-T5-Epaper-Series)
