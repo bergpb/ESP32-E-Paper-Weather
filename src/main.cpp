@@ -20,8 +20,8 @@
 */
 
 #include "owm_credentials.h"
-#include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson
-#include <WiFi.h>        // Built-in
+#include <ArduinoJson.h>              // https://github.com/bblanchon/ArduinoJson
+#include <WiFi.h>                     // Built-in
 #include "time.h"
 #include <SPI.h>
 #define ENABLE_GxEPD2_display 0
@@ -29,59 +29,29 @@
 #include <GxEPD2_3C.h>
 #include <U8g2_for_Adafruit_GFX.h>
 #include "forecast_record.h"
-#include "lang.h" // Localisation (English)
+#include "lang.h"                     // Localisation (English)
 //#include "lang_cz.h"                // Localisation (Czech)
 //#include "lang_fr.h"                // Localisation (French)
-// #include "lang_gr.h"                  // Localisation (German)
+//#include "lang_gr.h"                // Localisation (German)
 //#include "lang_it.h"                // Localisation (Italian)
 //#include "lang_nl.h"                // Localisation (Dutch)
 //#include "lang_pl.h"                // Localisation (Polish)
 
-#define SCREEN_WIDTH 264
-#define SCREEN_HEIGHT 176
+//#define DRAW_GRID 1   //Help debug layout changes
+#define SCREEN_WIDTH 250
+#define SCREEN_HEIGHT 122
 
-enum alignmentType
-{
-  LEFT,
-  RIGHT,
-  CENTER
-};
+enum alignmentType { LEFT, RIGHT, CENTER };
 
 static const uint8_t EPD_BUSY = 4;  // to EPD BUSY
-static const uint8_t EPD_CS = 5;    // to EPD CS
-static const uint8_t EPD_RST = 16;  // to EPD RST
-static const uint8_t EPD_DC = 17;   // to EPD DC
-static const uint8_t EPD_SCK = 18;  // to EPD CLK
+static const uint8_t EPD_CS   = 5;  // to EPD CS
+static const uint8_t EPD_RST  = 16; // to EPD RST
+static const uint8_t EPD_DC   = 17; // to EPD DC
+static const uint8_t EPD_SCK  = 18; // to EPD CLK
 static const uint8_t EPD_MISO = -1; // Master-In Slave-Out not used, as no data from display
 static const uint8_t EPD_MOSI = 23; // to EPD DIN
 
-// Connections for e.g. LOLIN D32 or TTGO T5S
-//static const uint8_t EPD_BUSY = 4;  // to EPD BUSY
-//static const uint8_t EPD_CS   = 5;  // to EPD CS
-//static const uint8_t EPD_RST  = 16; // to EPD RST
-//static const uint8_t EPD_DC   = 17; // to EPD DC
-//static const uint8_t EPD_SCK  = 18; // to EPD CLK
-//static const uint8_t EPD_MISO = 19; // Master-In Slave-Out not used, as no data from display
-//static const uint8_t EPD_MOSI = 23; // to EPD DIN
-
-//static const uint8_t EPD_BUSY = 19;  // to EPD BUSY
-//static const uint8_t EPD_CS   = 17;  // to EPD CS
-//static const uint8_t EPD_RST  = 5; // to EPD RST
-//static const uint8_t EPD_DC   = 16; // to EPD DC
-//static const uint8_t EPD_SCK  = 18; // to EPD CLK
-//static const uint8_t EPD_MISO = 4; // Master-In Slave-Out not used, as no data from display
-//static const uint8_t EPD_MOSI = 23; // to EPD DIN
-
-// Connections for e.g. Waveshare ESP32 e-Paper Driver Board
-//static const uint8_t EPD_BUSY = 25;
-//static const uint8_t EPD_CS   = 15;
-//static const uint8_t EPD_RST  = 26;
-//static const uint8_t EPD_DC   = 27;
-//static const uint8_t EPD_SCK  = 13;
-//static const uint8_t EPD_MISO = 12; // Master-In Slave-Out not used, as no data from display
-//static const uint8_t EPD_MOSI = 14;
-
-GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(/*CS=D8*/ EPD_CS, /*DC=D3*/ EPD_DC, /*RST=D4*/ EPD_RST, /*BUSY=D2*/ EPD_BUSY));
+GxEPD2_BW<GxEPD2_213_B74, GxEPD2_213_B74::HEIGHT> display(GxEPD2_213_B74(/*CS=D8*/ EPD_CS, /*DC=D3*/ EPD_DC, /*RST=D4*/ EPD_RST, /*BUSY=D2*/ EPD_BUSY));
 
 U8G2_FOR_ADAFRUIT_GFX u8g2Fonts; // Select u8g2 font from here: https://github.com/olikraus/u8g2/wiki/fntlistall
 // Using fonts:
@@ -1045,7 +1015,7 @@ void InitialiseDisplay()
 
   Version 6.3 changed u8g2 fonts selection
    1.  Omitted 'FONT(' and added _tf to font names either Regular (R) or Bold (B)
-  
+
   Version 6.4
    1. Added an extra 20-secs sleep delay to allow for slow ESP32 RTC timers
 
